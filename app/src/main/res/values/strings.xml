@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Coffee Shop Reviews</string>
+    <string name="coffee_shop_details">Review Details</string>
+    <string name="rating">Rating: %d</string>
+    <string name="location">Location</string>
+    <string name="details">Details</string>
+
+</resources>
