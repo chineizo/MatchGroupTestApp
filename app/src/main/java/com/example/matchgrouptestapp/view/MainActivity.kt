@@ -19,6 +19,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -31,6 +32,7 @@ import com.example.matchgrouptestapp.repository.ReviewRepository
 import com.example.matchgrouptestapp.ui.theme.MatchGroupTestAppTheme
 import com.example.matchgrouptestapp.viewmodel.MainActivityViewModel
 
+const val COFFEE_REVIEW__LIST_TEST = "coffee_review_list_test"
 /**
  * Class that shows List of Reviews of Coffee Shops in California
  */
@@ -102,7 +104,11 @@ class MainActivity : ComponentActivity() {
      */
     @Composable
     fun ShowReviewList(review: List<Review>) {
-        LazyColumn(modifier = Modifier.padding(vertical = 4.dp)) {
+        LazyColumn(
+            modifier = Modifier
+                .padding(vertical = 4.dp)
+                .testTag(COFFEE_REVIEW__LIST_TEST)
+        ) {
             items(items = review) { review ->
                 ReviewItem(review = review) {
                     Log.d(TAG, "Item Click is $review")

@@ -10,7 +10,7 @@ import com.example.matchgrouptestapp.repository.ReviewRepository
  * View model class that exposes Review API access and Live Data to observe for Review Items returned
  * from the API request
  */
-class MainActivityViewModel(private val reviewRepository: ReviewRepository) : ViewModel() {
+open class MainActivityViewModel(private val reviewRepository: ReviewRepository) : ViewModel() {
 
     /**
      * Get Review

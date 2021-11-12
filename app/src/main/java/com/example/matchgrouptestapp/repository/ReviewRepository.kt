@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.matchgrouptestapp.model.Review
 import com.example.matchgrouptestapp.model.ServiceRequestStatus
+import com.example.matchgrouptestapp.util.EspressoIdlingResource
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -11,14 +12,13 @@ import retrofit2.Response
 /**
  * Abstraction layer to interacts with the Review API to return Review items
  */
-class ReviewRepository : Repository() {
-
+open class ReviewRepository : Repository() {
 
     /**
      * Returns a live data of the Review Items received from the API call.
      */
     fun getReviews(): LiveData<ServiceRequestStatus> {
-        //EspressoIdlingResource.countingIdlingResource.increment()
+        EspressoIdlingResource.increment()
         val reviewLiveData = MutableLiveData<ServiceRequestStatus>()
         reviewService.getReview().enqueue(object : Callback<List<Review>> {
             override fun onResponse(
@@ -31,7 +31,7 @@ class ReviewRepository : Repository() {
                 } else {
                     reviewLiveData.postValue(ServiceRequestStatus.Failure("API Response failed!"))
                 }
-                //EspressoIdlingResource.countingIdlingResource.decrement()
+                EspressoIdlingResource.decrement()
             }
 
             override fun onFailure(call: Call<List<Review>>, t: Throwable) {
